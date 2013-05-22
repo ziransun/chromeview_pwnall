@@ -467,7 +467,9 @@ public class AwContents {
             return;
         }
         Rect clip = canvas.getClipBounds();
-        if (!nativeDrawSW(mNativeAwContents, canvas, clip.left, clip.top,
+        int x = mContentViewCore.getNativeScrollXForTest();
+        int y = mContentViewCore.getNativeScrollYForTest();
+        if (!nativeDrawSW(mNativeAwContents, canvas, clip.left + x, clip.top + y,
                 clip.right - clip.left, clip.bottom - clip.top)) {
             Log.w(TAG, "Native DrawSW failed; clearing to background color.");
             int c = mContentViewCore.getBackgroundColor();
